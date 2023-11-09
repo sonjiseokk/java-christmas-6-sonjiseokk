@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.menu;
 
 public enum DessertMenu {
     CHOCO_CAKE("초코케이크",new Price(15_000)),

@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.menu;
 
 public enum DrinkMenu {
     ZERO_COKE("제로콜라", new Price(3_000)),
