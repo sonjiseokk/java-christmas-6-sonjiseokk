@@ -1,5 +1,6 @@
-package christmas.domain;
+package christmas.domain.order;
 
+import christmas.domain.Week;
 import christmas.domain.menu.Gift;
 import christmas.domain.menu.Menu;
 import christmas.view.validator.DateValidator;
@@ -10,16 +11,18 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
-import static christmas.domain.EventDate.DECEMBER_2023;
+import static christmas.constant.EventMonth.DECEMBER_2023;
 
 public class Order {
     private static final Set<DayOfWeek> WEEKEND_DAYS = EnumSet.of(DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
     private LocalDate date;
     private List<Menu> menus;
 
-    public Order(final int date,final List<Menu> menus) {
+    public Order(final String date,final List<Menu> menus) {
         DateValidator.valid(date);
-        this.date = LocalDate.of(DECEMBER_2023.getYear(), DECEMBER_2023.getMonth(),date);
+        int dateValue = Integer.parseInt(date);
+
+        this.date = LocalDate.of(DECEMBER_2023.getYear(), DECEMBER_2023.getMonth(),dateValue);
         this.menus = menus;
     }
     public Week determineWeekType() {
@@ -27,6 +30,9 @@ public class Order {
             return Week.WEEKEND;
         }
         return Week.WEEKDAY;
+    }
+    public boolean canJoinEvent(List<Menu> menus) {
+        return getTotalPrice(menus) >= 1_0000;
     }
     public int getTotalPrice(List<Menu> menus) {
         return menus.stream()
