@@ -17,9 +17,9 @@ public class Order {
     private LocalDate date;
     private List<Menu> menus;
 
-    public Order(final int day,final List<Menu> menus) {
-        DateValidator.valid(day);
-        this.date = LocalDate.of(DECEMBER_2023.getYear(), DECEMBER_2023.getMonth(),day);
+    public Order(final int date,final List<Menu> menus) {
+        DateValidator.valid(date);
+        this.date = LocalDate.of(DECEMBER_2023.getYear(), DECEMBER_2023.getMonth(),date);
         this.menus = menus;
     }
     public Week determineWeekType() {
