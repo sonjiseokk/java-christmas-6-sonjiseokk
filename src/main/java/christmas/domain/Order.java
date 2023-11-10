@@ -2,6 +2,7 @@ package christmas.domain;
 
 import christmas.domain.menu.Gift;
 import christmas.domain.menu.Menu;
+import christmas.view.validator.DateValidator;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -17,7 +18,7 @@ public class Order {
     private List<Menu> menus;
 
     public Order(final int day,final List<Menu> menus) {
-        // TODO: day valid
+        DateValidator.valid(day);
         this.date = LocalDate.of(DECEMBER_2023.getYear(), DECEMBER_2023.getMonth(),day);
         this.menus = menus;
     }
