@@ -50,6 +50,10 @@ public enum Menu {
         return menuList;
     }
 
+    public static int countMenu(List<Menu> menus,Menu base) {
+        return (int) menus.stream().filter(menu -> base.name == menu.name)
+                .count();
+    }
     public String getName() {
         return name;
     }
