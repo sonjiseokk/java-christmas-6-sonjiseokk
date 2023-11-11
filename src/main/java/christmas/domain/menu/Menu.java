@@ -1,5 +1,9 @@
 package christmas.domain.menu;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import static christmas.domain.menu.Category.*;
 
 public enum Menu {
@@ -24,6 +28,34 @@ public enum Menu {
         this.name = name;
         this.price = price;
         this.category = category;
+    }
+
+    public static Menu getMenuByName(String name) {
+        for (Menu menu : Menu.values()) {
+            if (menu.name.equals(name)) {
+                return menu;
+            }
+        }
+        return null;
+    }
+
+    public static List<Menu> generateMenuList(Set<String> menuNames) {
+        List<Menu> menuList = new ArrayList<>();
+        for (String name : menuNames) {
+            Menu menu = getMenuByName(name);
+            if (menu != null) {
+                menuList.add(menu);
+            }
+        }
+        return menuList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     public int getPrice() {
