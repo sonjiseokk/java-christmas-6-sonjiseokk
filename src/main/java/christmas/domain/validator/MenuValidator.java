@@ -10,15 +10,15 @@ import java.util.Set;
 public class MenuValidator {
     public static void isMenuCountValid(Map<String, Integer> menuValues) throws IllegalArgumentException{
         if (isNotExistMenu(menuValues)) {
-            throw new IllegalArgumentException("메뉴판에 없는 메뉴입니다.");
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
         if (isNotValidCount(menuValues)) {
-            throw new IllegalArgumentException("메뉴는 1개 이상, 20개 미만으로 주문해야합니다.");
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
     public static void drinkValid(final List<Menu> menus) {
         if (isOnlyDrink(menus)) {
-            throw new IllegalStateException("음료만 주문할 수 없습니다.");
+            throw new IllegalStateException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
