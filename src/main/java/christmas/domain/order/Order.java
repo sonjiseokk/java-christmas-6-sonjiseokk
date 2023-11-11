@@ -1,19 +1,18 @@
 package christmas.domain.order;
 
-import christmas.domain.Week;
 import christmas.domain.menu.Gift;
 import christmas.domain.menu.Menu;
 import christmas.domain.validator.DateValidator;
 import christmas.domain.validator.MenuValidator;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static christmas.constant.EventMonth.DECEMBER_2023;
 
 public class Order {
-    private static final Set<DayOfWeek> WEEKEND_DAYS = EnumSet.of(DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
     private LocalDate date;
     private List<Menu> menus;
 
@@ -22,18 +21,12 @@ public class Order {
         MenuValidator.isMenuCountValid(inputMenus);
 
         List<Menu> menus = Menu.generateMenuList(inputMenus);
-        MenuValidator.priceAndDrinkValid(menus);
+        MenuValidator.drinkValid(menus);
 
         int dateValue = Integer.parseInt(date);
 
         this.date = LocalDate.of(DECEMBER_2023.getYear(), DECEMBER_2023.getMonth(),dateValue);
         this.menus = menus;
-    }
-    public Week determineWeekType() {
-        if (WEEKEND_DAYS.contains(this.date.getDayOfWeek())) {
-            return Week.WEEKEND;
-        }
-        return Week.WEEKDAY;
     }
     public Map<String, Integer> getMenuCount() {
         Map<String, Integer> menuCount = new HashMap<>();
@@ -42,9 +35,6 @@ public class Order {
             menuCount.put(menuName, menuCount.getOrDefault(menuName, 0) + 1);
         }
         return menuCount;
-    }
-    public boolean canJoinEvent() {
-        return this.getTotalPrice() >= 1_0000;
     }
     public int getTotalPrice() {
         return this.menus.stream()
