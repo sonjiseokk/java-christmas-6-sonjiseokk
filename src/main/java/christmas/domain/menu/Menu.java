@@ -2,7 +2,8 @@ package christmas.domain.menu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 import static christmas.domain.menu.Category.*;
 
@@ -39,20 +40,16 @@ public enum Menu {
         return null;
     }
 
-    public static List<Menu> generateMenuList(Set<String> menuNames) {
+    public static List<Menu> generateMenuList(Map<String, Integer> menuValues) {
         List<Menu> menuList = new ArrayList<>();
-        for (String name : menuNames) {
-            Menu menu = getMenuByName(name);
-            if (menu != null) {
-                menuList.add(menu);
-            }
-        }
+        menuValues.forEach((name, quantity) -> addMenu(menuList, name, quantity));
         return menuList;
     }
-
-    public static int countMenu(List<Menu> menus,Menu base) {
-        return (int) menus.stream().filter(menu -> base.name == menu.name)
-                .count();
+    private static void addMenu(List<Menu> menuList, String name, int quantity) {
+        Menu menu = getMenuByName(name);
+        if (menu != null) {
+            IntStream.range(0, quantity).forEach(i -> menuList.add(menu));
+        }
     }
     public String getName() {
         return name;
