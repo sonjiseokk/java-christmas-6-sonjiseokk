@@ -8,10 +8,7 @@ import christmas.domain.validator.MenuValidator;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static christmas.constant.EventMonth.DECEMBER_2023;
 
@@ -24,7 +21,7 @@ public class Order {
         DateValidator.valid(date);
         MenuValidator.valid(inputMenus);
 
-        List<Menu> menus = Menu.generateMenuList(inputMenus.keySet());
+        List<Menu> menus = Menu.generateMenuList(inputMenus);
         MenuValidator.onlyDrinkValid(menus);
 
         int dateValue = Integer.parseInt(date);
@@ -37,6 +34,14 @@ public class Order {
             return Week.WEEKEND;
         }
         return Week.WEEKDAY;
+    }
+    public Map<String, Integer> getMenuCount() {
+        Map<String, Integer> menuCount = new HashMap<>();
+        for (Menu menu : this.menus) {
+            String menuName = menu.getName();
+            menuCount.put(menuName, menuCount.getOrDefault(menuName, 0) + 1);
+        }
+        return menuCount;
     }
     public boolean canJoinEvent() {
         return this.getTotalPrice() >= 1_0000;
