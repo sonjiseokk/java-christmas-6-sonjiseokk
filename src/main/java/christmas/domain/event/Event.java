@@ -6,11 +6,19 @@ public enum Event {
     WEEKEND("특별 할인: ",2_023),
     GIFT("증정 이벤트: ", 25_000);
 
-    private String keyword;
+    private final String keyword;
     private Integer discount;
 
     Event(final String keyword, final Integer discount) {
         this.keyword = keyword;
         this.discount = discount;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public Integer getDiscount() {
+        return discount;
     }
 }

@@ -21,9 +21,9 @@ public enum Menu {
     BARBECUE_RIBS("바비큐립", 54_000, MAIN_MENU),
     SEAFOOD_PASTA("해산물파스타", 35_000, MAIN_MENU),
     CHRISTMAS_PASTA("크리스마스파스타", 25_000, MAIN_MENU);
-    private String name;
-    private int price;
-    private Category category;
+    private final String name;
+    private final int price;
+    private final Category category;
 
     Menu(final String name, final int price, final Category category) {
         this.name = name;

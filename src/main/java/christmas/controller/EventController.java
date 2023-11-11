@@ -15,6 +15,10 @@ public class EventController {
         Order order = new Order(date, menusMap);
         orderOrientedPrint(order);
 
+        OutputView.printBenefit();
+        OutputView.printTotalPriceAfterDiscount();
+        OutputView.printPaymentPrice();
+        OutputView.printEventBadge();
     }
 
     private static void orderOrientedPrint(final Order order) {
