@@ -8,10 +8,13 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
         List<Policy> policies = List.of(new ChristmasDayPolicy(),new GiftPolicy(),new SpecialPolicy(), new WeekPolicy());
         DiscountService discountService = new DiscountService(policies);
         EventController controller = new EventController(discountService);
-        controller.play();
+        try {
+            controller.play();
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            System.out.println("[ERROR] " + e.getMessage());
+        }
     }
 }

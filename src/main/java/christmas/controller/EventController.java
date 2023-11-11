@@ -28,12 +28,8 @@ public class EventController {
         List<Benefit> benefits = discountService.discount(order);
         Integer totalDiscount = discountService.totalDiscount(benefits);
         Integer realDiscount = discountService.totalDiscountNoGift(benefits);
-        OutputView.printBenefit(benefits);
-        OutputView.printTotalPriceAfterDiscount(totalDiscount);
-        OutputView.printPaymentPrice(order.getTotalPrice() - realDiscount);
-
         EventBadge myBadge = EventBadge.findMyBadge(totalDiscount);
-        OutputView.printEventBadge(myBadge);
+        serviceOrientedPrint(benefits, totalDiscount, order, realDiscount, myBadge);
     }
 
     private static void orderOrientedPrint(final Order order) {
@@ -41,5 +37,13 @@ public class EventController {
         OutputView.printMenu(order.getMenuCount());
         OutputView.printTotalPriceBeforeDiscount(order.getTotalPrice());
         OutputView.printGiveaway(order.getGift(order.getTotalPrice()));
+    }
+    private static void serviceOrientedPrint(final List<Benefit> benefits,
+                                             final Integer totalDiscount, final Order order,
+                                             final Integer realDiscount, final EventBadge myBadge) {
+        OutputView.printBenefit(benefits);
+        OutputView.printTotalPriceAfterDiscount(totalDiscount);
+        OutputView.printPaymentPrice(order.getTotalPrice() - realDiscount);
+        OutputView.printEventBadge(myBadge);
     }
 }
