@@ -18,8 +18,8 @@ public class Parser {
     }
     private static void processPart(String part, Map<String, Integer> menus) {
         String[] itemParts = part.split("-");
-        String name = itemParts[0];
-        int quantity = Integer.parseInt(itemParts[1]);
+        String name = itemParts[0].trim();
+        int quantity = Integer.parseInt(itemParts[1].trim());
 
         menus.put(name, menus.getOrDefault(name, 0) + quantity);
     }
