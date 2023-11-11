@@ -1,9 +1,13 @@
 package christmas.view;
 
+import christmas.domain.event.Benefit;
+import christmas.domain.event.DiscountType;
+import christmas.domain.event.EventBadge;
 import christmas.domain.menu.Gift;
 import christmas.utils.Formatter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -30,19 +34,31 @@ public class OutputView {
         System.out.println(gift.getName());
         nextLine();
     }
-    public static void printBenefit() {
+    public static void printBenefit(final List<Benefit> benefits) {
         System.out.println("<혜택 내역>");
+        for (Benefit benefit : benefits) {
+            DiscountType type = benefit.getDiscountType();
+            String number = Formatter.numberFormat(benefit.getDiscount());
+            System.out.println(type.getKeyword() + "-"+number+"원");
+        }
+        nextLine();
     }
 
-    public static void printTotalPriceAfterDiscount() {
+    public static void printTotalPriceAfterDiscount(final Integer totalDiscount) {
         System.out.println("<총혜택 금액>");
+        System.out.println("-"+Formatter.numberFormat(totalDiscount)+"원");
+        nextLine();
     }
 
-    public static void printPaymentPrice() {
+    public static void printPaymentPrice(final Integer price) {
         System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(Formatter.numberFormat(price) + "원");
+        nextLine();
     }
-    public static void printEventBadge() {
+    public static void printEventBadge(final EventBadge eventBadge) {
         System.out.println("<12월 이벤트 배지>");
+        System.out.println(eventBadge);
+        nextLine();
     }
 
     private static void nextLine() {
