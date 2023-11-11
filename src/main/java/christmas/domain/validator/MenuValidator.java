@@ -28,11 +28,6 @@ public class MenuValidator {
             throw new IllegalArgumentException("음료만 주문할 수 없습니다.");
         }
     }
-
-    private static boolean containOnlyDrink(final Map<String, Integer> menus) {
-        return false;
-    }
-
     private static boolean isNotValidCount(final Map<String, Integer> menus) {
         int count = 0;
         for (Integer value : menus.values()) {

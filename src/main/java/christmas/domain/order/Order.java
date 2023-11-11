@@ -38,11 +38,11 @@ public class Order {
         }
         return Week.WEEKDAY;
     }
-    public boolean canJoinEvent(List<Menu> menus) {
-        return getTotalPrice(menus) >= 1_0000;
+    public boolean canJoinEvent() {
+        return this.getTotalPrice() >= 1_0000;
     }
-    public int getTotalPrice(List<Menu> menus) {
-        return menus.stream()
+    public int getTotalPrice() {
+        return this.menus.stream()
                 .mapToInt(menu -> menu.getPrice())
                 .sum();
     }
@@ -53,4 +53,11 @@ public class Order {
         return Gift.NO_GIFT;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public List<Menu> getMenus() {
+        return menus;
+    }
 }
