@@ -1,39 +1,34 @@
 package christmas.view;
 
-import christmas.domain.menu.Menu;
-import christmas.utils.NumberFormatter;
+import christmas.domain.menu.Gift;
+import christmas.utils.Formatter;
 
-import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Map;
 
 public class OutputView {
-    private final NumberFormat formatter;
-    public OutputView() {
-        formatter = NumberFormat.getNumberInstance();
-    }
     public static void printStart() {
         System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
     }
     public static void printEvent(LocalDate date) {
-        System.out.println(date.getMonth() + "월 " +
-                date.getDayOfMonth() + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
-        System.out.println();
+        String dateFormat = Formatter.dateFormat(date);
+        System.out.println(dateFormat + "에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+        nextLine();
     }
-    public static void printMenu(final List<Menu> menus) {
+    public static void printMenu(final Map<String, Integer> menuCount) {
         System.out.println("<주문 메뉴>");
-        for (Menu menu : menus) {
-            System.out.println(menu.getName() + " " + Menu.countMenu(menus, menu) + "개");
-        }
-        System.out.println();
+        menuCount.forEach((menuName, count) -> System.out.println(menuName + " " + count + "개"));
+        nextLine();
     }
     public static void printTotalPriceBeforeDiscount(final int totalPrice) {
         System.out.println("<할인 전 총주문 금액>");
-        System.out.println(NumberFormatter.format(totalPrice)+"원");
-        System.out.println();
+        System.out.println(Formatter.numberFormat(totalPrice)+"원");
+        nextLine();
     }
-    public static void printGiveaway() {
+    public static void printGiveaway(final Gift gift) {
         System.out.println("<증정 메뉴>");
+        System.out.println(gift.getName());
+        nextLine();
     }
     public static void printBenefit() {
         System.out.println("<혜택 내역>");
@@ -48,5 +43,9 @@ public class OutputView {
     }
     public static void printEventBadge() {
         System.out.println("<12월 이벤트 배지>");
+    }
+
+    private static void nextLine() {
+        System.out.println();
     }
 }
