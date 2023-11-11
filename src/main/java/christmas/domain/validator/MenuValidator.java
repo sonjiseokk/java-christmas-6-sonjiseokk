@@ -8,10 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class MenuValidator {
-    public static void valid(Map<String, Integer> menus) throws IllegalArgumentException{
-        /**
-         * TODO: 있는 메뉴인지, 개수가 1이상인지, 음료만 있는건지, 최대 개수가 20개가 안넘는지 체크
-         */
+    public static void isMenuCountValid(Map<String, Integer> menus) throws IllegalArgumentException{
         if (isNotExistMenu(menus)) {
             throw new IllegalArgumentException("메뉴판에 없는 메뉴입니다.");
         }
@@ -19,15 +16,15 @@ public class MenuValidator {
             throw new IllegalArgumentException("메뉴는 1개 이상, 20개 미만으로 주문해야합니다.");
         }
     }
-
-    public static void onlyDrinkValid(List<Menu> menus) {
-        long count = menus.stream().filter(menu -> menu.getCategory() == Category.DRINK_MENU)
-                .count();
-
-        if (count == menus.size()) {
-            throw new IllegalArgumentException("음료만 주문할 수 없습니다.");
+    public static void priceAndDrinkValid(final List<Menu> menus) {
+        if (isOnlyDrink(menus)) {
+            throw new IllegalStateException("음료만 주문할 수 없습니다.");
+        }
+        if (totalPriceCheck(menus)) {
+            throw new IllegalStateException("총 메뉴의 합이 10,000원 이상이여야 합니다.");
         }
     }
+
     private static boolean isNotValidCount(final Map<String, Integer> menus) {
         int count = 0;
         for (Integer value : menus.values()) {
@@ -48,4 +45,14 @@ public class MenuValidator {
         }
         return false;
     }
+    private static boolean isOnlyDrink(List<Menu> menus) {
+        long count = menus.stream().filter(menu -> menu.getCategory() == Category.DRINK_MENU)
+                .count();
+        return count == menus.size();
+    }
+    private static boolean totalPriceCheck(final List<Menu> menus) {
+        return menus.stream().mapToInt(menu -> menu.getPrice()).sum() < 10_000;
+    }
+
+
 }

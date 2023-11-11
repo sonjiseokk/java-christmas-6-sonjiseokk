@@ -19,10 +19,10 @@ public class Order {
 
     public Order(final String date,final Map<String, Integer> inputMenus) {
         DateValidator.valid(date);
-        MenuValidator.valid(inputMenus);
+        MenuValidator.isMenuCountValid(inputMenus);
 
         List<Menu> menus = Menu.generateMenuList(inputMenus);
-        MenuValidator.onlyDrinkValid(menus);
+        MenuValidator.priceAndDrinkValid(menus);
 
         int dateValue = Integer.parseInt(date);
 
