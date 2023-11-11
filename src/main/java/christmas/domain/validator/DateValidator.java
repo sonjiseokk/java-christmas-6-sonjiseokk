@@ -1,4 +1,4 @@
-package christmas.view.validator;
+package christmas.domain.validator;
 
 
 import static christmas.constant.DateRange.MONTH;
