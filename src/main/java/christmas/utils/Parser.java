@@ -1,5 +1,7 @@
 package christmas.utils;
 
+import christmas.domain.validator.ParseValidator;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +20,8 @@ public class Parser {
     }
     private static void processPart(String part, Map<String, Integer> menus) {
         String[] itemParts = part.split("-");
+        ParseValidator.valid(itemParts);
+
         String name = itemParts[0].trim();
         int quantity = Integer.parseInt(itemParts[1].trim());
 
