@@ -8,7 +8,7 @@ import java.util.Map;
 public class Parser {
     public static Map<String, Integer> parse(String menuInput) {
         String[] parts = menuInput.split(",");
-        ParseValidator.commaValid(parts);
+        ParseValidator.separatorValid(parts);
         return generateMenusValues(parts);
     }
 
