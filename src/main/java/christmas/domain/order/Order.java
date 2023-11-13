@@ -2,7 +2,6 @@ package christmas.domain.order;
 
 import christmas.domain.menu.Gift;
 import christmas.domain.menu.Menu;
-import christmas.domain.validator.DateValidator;
 import christmas.domain.validator.MenuValidator;
 
 import java.time.LocalDate;
@@ -10,25 +9,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static christmas.constant.EventMonth.DECEMBER_2023;
+import static christmas.constant.EventMonth.NOW;
 
 public class Order {
     private LocalDate date;
     private List<Menu> menus;
 
-    public Order(final String date,final Map<String, Integer> inputMenus) {
-        DateValidator.valid(date);
-        MenuValidator.isMenuCountValid(inputMenus);
+    public Order(final Integer date,final Map<String, Integer> menuValues) {
+        MenuValidator.existMenuValid(menuValues);
+        MenuValidator.countValid(menuValues);
 
-        List<Menu> menus = Menu.generateMenuList(inputMenus);
+        List<Menu> menus = Menu.convertToMenus(menuValues);
         MenuValidator.drinkValid(menus);
 
-        int dateValue = Integer.parseInt(date);
-
-        this.date = LocalDate.of(DECEMBER_2023.getYear(), DECEMBER_2023.getMonth(),dateValue);
+        this.date = LocalDate.of(NOW.getYear(), NOW.getMonth(),date);
         this.menus = menus;
     }
-    public Map<String, Integer> getMenuCount() {
+    public Map<String, Integer> countMenus() {
         Map<String, Integer> menuCount = new HashMap<>();
         for (Menu menu : this.menus) {
             String menuName = menu.getName();
