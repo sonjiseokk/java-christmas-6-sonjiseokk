@@ -8,10 +8,12 @@ import java.util.Map;
 import java.util.Set;
 
 public class MenuValidator {
-    public static void isMenuCountValid(Map<String, Integer> menuValues) throws IllegalArgumentException{
+    public static void existMenuValid(Map<String, Integer> menuValues) throws IllegalArgumentException {
         if (isNotExistMenu(menuValues)) {
             throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
+    }
+    public static void countValid(Map<String, Integer> menuValues) throws IllegalArgumentException{
         if (isNotValidCount(menuValues)) {
             throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
