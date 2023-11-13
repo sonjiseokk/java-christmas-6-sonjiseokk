@@ -1,7 +1,7 @@
 package christmas.constant;
 
 public enum EventMonth {
-    DECEMBER_2023(2023, 12);
+    NOW(2023, 12);
 
     private final int year;
     private final int month;

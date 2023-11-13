@@ -19,7 +19,7 @@ public class EventController {
 
     public void play() {
         OutputView.printStart();
-        String date = InputView.readDate();
+        Integer date = InputView.readDate();
         Map<String, Integer> menusMap = InputView.orderMenu();
 
         Order order = new Order(date, menusMap);
@@ -29,12 +29,13 @@ public class EventController {
         Integer totalDiscount = discountService.totalDiscount(benefits);
         Integer realDiscount = discountService.totalDiscountNoGift(benefits);
         EventBadge myBadge = EventBadge.findMyBadge(totalDiscount);
+
         serviceOrientedPrint(benefits, totalDiscount, order, realDiscount, myBadge);
     }
 
     private static void orderOrientedPrint(final Order order) {
         OutputView.printEvent(order.getDate());
-        OutputView.printMenu(order.getMenuCount());
+        OutputView.printMenu(order.countMenus());
         OutputView.printTotalPriceBeforeDiscount(order.getTotalPrice());
         OutputView.printGiveaway(order.getGift(order.getTotalPrice()));
     }

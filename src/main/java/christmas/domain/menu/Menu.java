@@ -40,7 +40,7 @@ public enum Menu {
         return null;
     }
 
-    public static List<Menu> generateMenuList(Map<String, Integer> menuValues) {
+    public static List<Menu> convertToMenus(Map<String, Integer> menuValues) {
         List<Menu> menuList = new ArrayList<>();
         menuValues.forEach((name, quantity) -> addMenu(menuList, name, quantity));
         return menuList;
