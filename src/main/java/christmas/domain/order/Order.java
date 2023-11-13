@@ -21,7 +21,6 @@ public class Order {
 
         List<Menu> menus = Menu.convertToMenus(menuValues);
         MenuValidator.drinkValid(menus);
-        MenuValidator.totalPriceValid(menus);
 
         this.date = LocalDate.of(NOW.getYear(), NOW.getMonth(),date);
         this.menus = menus;
