@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class Formatter {
-    public static String numberFormat(Integer input) {
+    public static String priceFormat(Integer input) {
         NumberFormat formatter = NumberFormat.getNumberInstance();
         return formatter.format(input);
     }
