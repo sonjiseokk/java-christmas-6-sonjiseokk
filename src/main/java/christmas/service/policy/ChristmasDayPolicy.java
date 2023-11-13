@@ -9,6 +9,10 @@ import static christmas.domain.event.DiscountType.NO;
 public class ChristmasDayPolicy implements Policy{
     @Override
     public Benefit apply(Order order) {
+        if (order.getTotalPrice() < 10000) {
+            return new Benefit(NO, 0);
+        }
+
         int dayOfMonth = order.getDate().getDayOfMonth();
 
         if (dayOfMonth > 25) {

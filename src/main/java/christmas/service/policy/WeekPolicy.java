@@ -19,6 +19,9 @@ public class WeekPolicy implements Policy{
     private static final Set<DayOfWeek> WEEKEND_DAYS = EnumSet.of(FRIDAY, SATURDAY);
     @Override
     public Benefit apply(final Order order) {
+        if (order.getTotalPrice() < 10000) {
+            return new Benefit(NO, 0);
+        }
         if (WEEKEND_DAYS.contains(order.getDate().getDayOfWeek())) {
             return getWeekendBenefit(order);
         }

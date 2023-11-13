@@ -15,6 +15,9 @@ public class SpecialPolicy implements Policy{
 
     @Override
     public Benefit apply(final Order order) {
+        if (order.getTotalPrice() < 10000) {
+            return new Benefit(NO, 0);
+        }
         LocalDate today = order.getDate();
         if (today.getDayOfWeek() == specialDay || today.getDayOfMonth() == 25) {
             return new Benefit(SPECIAL, 1000);

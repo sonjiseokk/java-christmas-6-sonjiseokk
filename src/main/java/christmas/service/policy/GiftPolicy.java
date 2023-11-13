@@ -12,6 +12,9 @@ public class GiftPolicy implements Policy{
 
     @Override
     public Benefit apply(final Order order) {
+        if (order.getTotalPrice() < 10000) {
+            return new Benefit(NO, 0);
+        }
         Gift orderGift = order.getGift(order.getTotalPrice());
         if (orderGift == CHAMPAGNE_GIFT) {
             return new Benefit(GIFT, CHAMPAGNE_GIFT.getPrice());
