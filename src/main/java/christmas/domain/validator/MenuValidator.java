@@ -23,12 +23,6 @@ public class MenuValidator {
             throw new IllegalStateException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
-    public static void totalPriceValid(final List<Menu> menus) {
-        if (unsatisfyTotalPrice(menus)) {
-            throw new IllegalStateException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
-        }
-    }
-
     private static boolean isNotValidCount(final Map<String, Integer> menuValues) {
         int count = 0;
         for (Integer value : menuValues.values()) {

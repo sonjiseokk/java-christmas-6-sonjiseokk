@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class MenuValidatorTest {
     @AfterEach
@@ -51,17 +50,7 @@ class MenuValidatorTest {
         assertThatThrownBy(() -> MenuValidator.drinkValid(menus))
                 .isInstanceOf(IllegalStateException.class);
     }
-    @Test
-    @DisplayName("최소 주문금액을 못채운 경우")
-    void 최소_주문금액을_못채운_경우() throws Exception {
-        //given
-        String userInput = "양송이스프-1,제로콜라-1";
-        Map<String, Integer> orderMenu = getOrderMenu(userInput);
-        List<Menu> menus = Menu.convertToMenus(orderMenu);
-        //then
-        assertThatThrownBy(() -> MenuValidator.totalPriceValid(menus))
-                .isInstanceOf(IllegalStateException.class);
-    }
+
 
     private static Map<String, Integer> getOrderMenu(final String userInput) {
         InputStream in = new ByteArrayInputStream(userInput.getBytes());
