@@ -15,7 +15,6 @@ import java.util.Map;
 import static christmas.domain.event.DiscountType.D_DAY_DISCOUNT;
 import static christmas.domain.event.DiscountType.NO;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ChristmasDayPolicyTest {
     private static final Integer CANT_DISCOUNT_D_DAY_CHRISTAMAS_EVENT = 26;
@@ -28,7 +27,7 @@ class ChristmasDayPolicyTest {
     @DisplayName("크리스마스 할인 적용이 되는 경우")
     void 크리스마스_할인_적용이_되는_경우() throws Exception {
         //given
-        Order order = getOrder(CAN_DISCOUNT_D_DAY_CHRISTAMAS_EVENT);
+        Order order = getOrder(CAN_DISCOUNT_D_DAY_CHRISTAMAS_EVENT,"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         //when
         ChristmasDayPolicy policy = new ChristmasDayPolicy();
         Benefit benefit = policy.apply(order);
@@ -40,7 +39,7 @@ class ChristmasDayPolicyTest {
     @DisplayName("크리스마스 할인 적용이 안되는 경우")
     void 크리스마스_할인_적용이_안되는_경우() throws Exception {
         //given
-        Order order = getOrder(CANT_DISCOUNT_D_DAY_CHRISTAMAS_EVENT);
+        Order order = getOrder(CANT_DISCOUNT_D_DAY_CHRISTAMAS_EVENT,"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         //when
         ChristmasDayPolicy policy = new ChristmasDayPolicy();
         Benefit benefit = policy.apply(order);
@@ -48,15 +47,27 @@ class ChristmasDayPolicyTest {
         assertThat(benefit.getDiscountType()).isEqualTo(NO);
         assertThat(benefit.getDiscount()).isEqualTo(0);
     }
+    @Test
+    @DisplayName("오더 총합이 만원 미만인 경우")
+    void 오더_총합이_만원_미만인_경우() throws Exception {
+        //given
+        Order order = getOrder(CAN_DISCOUNT_D_DAY_CHRISTAMAS_EVENT, "타파스-1,제로콜라-1");
+        //when
+        ChristmasDayPolicy policy = new ChristmasDayPolicy();
+        Benefit benefit = policy.apply(order);
 
-    private static Order getOrder(Integer userDate) {
+        //then
+        assertThat(benefit.getDiscountType()).isEqualTo(NO);
+        assertThat(benefit.getDiscount()).isEqualTo(0);
+    }
+
+    private static Order getOrder(Integer userDate,String userInput) {
         Integer date = userDate;
-        Map<String, Integer> orderMenu = getOrderMenu();
+        Map<String, Integer> orderMenu = getOrderMenu(userInput);
         return new Order(date, orderMenu);
     }
 
-    private static Map<String, Integer> getOrderMenu() {
-        String userInput = "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1";
+    private static Map<String, Integer> getOrderMenu(final String userInput) {
         InputStream in = new ByteArrayInputStream(userInput.getBytes());
         System.setIn(in);
         //when
