@@ -26,7 +26,7 @@ public class OutputView {
     }
     public static void printTotalPriceBeforeDiscount(final int totalPrice) {
         System.out.println("<할인 전 총주문 금액>");
-        System.out.println(Formatter.numberFormat(totalPrice)+"원");
+        System.out.println(Formatter.priceFormat(totalPrice)+"원");
         nextLine();
     }
     public static void printGiveaway(final Gift gift) {
@@ -38,7 +38,7 @@ public class OutputView {
         System.out.println("<혜택 내역>");
         for (Benefit benefit : benefits) {
             DiscountType type = benefit.getDiscountType();
-            String number = Formatter.numberFormat(benefit.getDiscount());
+            String number = Formatter.priceFormat(benefit.getDiscount());
             System.out.println(type.getKeyword() + "-"+number+"원");
         }
         nextLine();
@@ -46,13 +46,13 @@ public class OutputView {
 
     public static void printTotalPriceAfterDiscount(final Integer totalDiscount) {
         System.out.println("<총혜택 금액>");
-        System.out.println("-"+Formatter.numberFormat(totalDiscount)+"원");
+        System.out.println("-"+Formatter.priceFormat(totalDiscount)+"원");
         nextLine();
     }
 
     public static void printPaymentPrice(final Integer price) {
         System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(Formatter.numberFormat(price) + "원");
+        System.out.println(Formatter.priceFormat(price) + "원");
         nextLine();
     }
     public static void printEventBadge(final EventBadge eventBadge) {
