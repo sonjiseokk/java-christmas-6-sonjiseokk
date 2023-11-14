@@ -1,7 +1,6 @@
 package christmas.constant;
 
 public enum DateRange {
-    BEFORE_CHRISTMAS_EVENT(1,25),
     MONTH(1,31);
 
     private int start;

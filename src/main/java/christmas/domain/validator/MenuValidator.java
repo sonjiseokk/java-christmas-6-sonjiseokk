@@ -48,12 +48,4 @@ public class MenuValidator {
                 .count();
         return count == menus.size();
     }
-    private static boolean unsatisfyTotalPrice(List<Menu> menus) {
-        int sum = menus.stream()
-                .mapToInt(menu -> menu.getPrice())
-                .sum();
-        return sum < 10_000;
-    }
-
-
 }
